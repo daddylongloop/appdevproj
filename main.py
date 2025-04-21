@@ -122,7 +122,6 @@ for i in range(33473): # can do in chunks of 33,473 ( will run 8 times ) ?
             last_ingredient_id = cursor.fetchone()[0]  # Fetch the first column of the result
         else:
             # TODO get the last ingredient id
-            print(f"INGREDIENT '{ing}' found")
             cursor.execute("SELECT ID FROM Ingredients WHERE name = %(name)s", {'name': ing})
             last_ingredient_id = cursor.fetchone()[0] # type: ignore
 
