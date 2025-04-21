@@ -101,7 +101,7 @@ def sql_search_ingredient(_cursor, ingredient_name):
     result = _cursor.fetchone()  # Fetch one result (or use fetchall() for multiple results)
     return result is not None  # Return True if the ingredient exists, False otherwise
 
-for i in range(33473): # can do in chunks of 33,473 ( will run 8 times ) ?
+while(True): # will exit on array out of bounds error on line 105
     recipe, ingredients, tags = extract_data(i)
 
     # TODO uplaod recipe to the recipe table
@@ -135,5 +135,5 @@ for i in range(33473): # can do in chunks of 33,473 ( will run 8 times ) ?
                 cursor.execute(add_tag_asgn, tag_asgn)
 
     cnx.commit()
-
+    print(f"Uploaded recipe {last_recipe_NID} ({recipe['id']})")
 cnx.close()
