@@ -102,8 +102,9 @@ def sql_search_ingredient(_cursor, ingredient_name):
     return result is not None  # Return True if the ingredient exists, False otherwise
 
 while(True): # will exit on array out of bounds error on line 105
-    recipe, ingredients, tags = extract_data(i)
-
+    try: recipe, ingredients, tags = extract_data(i)
+    except IndexError: print("all recipes uploaded."); break
+    
     # TODO uplaod recipe to the recipe table
     recipe['NID'] = None
     cursor.execute(add_recipe, recipe)
