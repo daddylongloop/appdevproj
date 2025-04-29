@@ -53,3 +53,20 @@ ALTER TABLE `tags`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 """
+
+if __name__ == "__main__":
+  import mysql.connector
+  cursor = (cnx := mysql.connector.connect(
+    host="127.0.0.1", user="PEOPLE", password="pass",
+    port=8889, get_warnings=True, auth_plugin='mysql_native_password',
+    database="RAW_RECIPES"
+  )).cursor()
+  cnx.autocommit = True # type: ignore
+  cursor.execute(CREATE_RECIPE_TABLE)
+  cursor.execute(CREATE_TAG_ASGN)
+  cursor.execute(CREATE_TABLE_INGREDIENTS)
+  cursor.execute(CREATE_TABLE_INGREDIENTS_ASGN)
+  cursor.execute(CREATE_TABLE_TAGS, multi=True)
+  cnx.commit()
+  cnx.close()
+
