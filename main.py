@@ -67,7 +67,10 @@ def parse_tags(tags_entry) -> list[int]:
     except Exception as e: return []
     for tag in tags:
         if tag in important_tags:
-            ret.append(important_tags.index(tag)+1) # ids start at 1 
+            if tag == "main-dish":
+                ret.append(12) # main-dishes same as main-dish(index 11+1)
+            else: 
+                ret.append(important_tags.index(tag)+1) # ids start at 1 
     return ret
 
 def extract_data(index_of_row) -> Tuple[dict, list, list]:
